@@ -1,6 +1,6 @@
 import re
 
-from math import MixedNumber
+from .mixed_number import MixedNumber
 
 LITERAL_MIXED = 'Mixed'
 LITERAL_NUMBER = 'Number'
