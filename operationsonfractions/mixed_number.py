@@ -48,7 +48,7 @@ class MixedNumber:
         improper_fraction = self.to_improper_fraction()
         out_fraction = None
 
-        if other_type is int or other_type is Fraction:
+        if other_type in [int, Fraction]:
             out_fraction = improper_fraction + other
 
         if other_type is MixedNumber:
@@ -69,7 +69,7 @@ class MixedNumber:
 
         out_fraction = None
 
-        if other_type is int or other_type is Fraction:
+        if other_type in [int, Fraction]:
             out_fraction = self.to_improper_fraction() * other
 
         if other_type is MixedNumber:
@@ -81,7 +81,7 @@ class MixedNumber:
         other_type = type(other)
         out_fraction = None
 
-        if other_type is int or other_type is Fraction:
+        if other_type in [int, Fraction]:
             out_fraction = self.to_improper_fraction() / other
 
         if other_type is MixedNumber:
@@ -93,7 +93,7 @@ class MixedNumber:
         other_type = type(other)
         out_fraction = None
 
-        if other_type is int or other_type is Fraction:
+        if other_type in [int, Fraction]:
             out_fraction = other / self.to_improper_fraction()
 
         if other_type is MixedNumber:
