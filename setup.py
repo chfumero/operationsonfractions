@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='mn_eval',
+    name='operationsonfractions',
     version='0.1.0',
-    packages=['mn_eval'],
+    packages=['operationsonfractions'],
     entry_points={
         'console_scripts': [
-            'mn_eval = mn_eval.__main__:main'
+            'operationsonfractions = operationsonfractions.__main__:main'
         ]
     })

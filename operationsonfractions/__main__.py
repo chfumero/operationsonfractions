@@ -1,5 +1,5 @@
 import argparse
-from fractions import Fraction
+from .expression_eval import expression_eval
 
 
 def main():
@@ -10,7 +10,12 @@ def main():
 
     args = parser.parse_args()
 
-    print(Fraction(5, 4) + Fraction(5, 4))
+    try:
+        print(str(expression_eval(args.expression)))
+    except SyntaxError as e:
+        print('char {}: Syntax error close to "{}"'.format(e.args[0], args.expression[e.args[0]:]))
+    except:
+        print('Something went wrong, please review your expression')
 
 
 if __name__ == "__main__":
