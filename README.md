@@ -1,5 +1,7 @@
 # Operations on fractions
 
+Basic expression evaluator CLI program.
+
 ## Requirements
 ```shell script
 python3

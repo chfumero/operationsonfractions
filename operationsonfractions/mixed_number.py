@@ -122,5 +122,4 @@ class MixedNumber:
     def __eq__(self, other):
         if type(other) is not MixedNumber:
             return False
-
         return self.whole == other.whole and self.fraction.__eq__(other.fraction)

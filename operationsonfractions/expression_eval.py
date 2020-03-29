@@ -44,7 +44,6 @@ class InfixOperator:
     def __eq__(self, other):
         if type(other) is not InfixOperator:
             return False
-
         return self.code == other.code
 
 
@@ -82,8 +81,15 @@ def tokenize_expr(exprarg):
     return tokens
 
 
-def peek(arr):
+def _peek(arr):
     return arr[-1] if len(arr) else None
+
+
+def _apply_operation(operators, output):
+    operand2 = output.pop()
+    operand1 = output.pop()
+    operator = operators.pop()
+    output.append(operator.execute(operand1, operand2))
 
 
 def expression_eval(expression):
@@ -92,28 +98,19 @@ def expression_eval(expression):
 
     tokens = tokenize_expr(expression)
     for token in tokens:
+        token_type = type(token)
 
-        if isinstance(token, MixedNumber) or isinstance(token, int) or isinstance(token, Fraction):
+        if token_type in [int, Fraction, MixedNumber]:
             output.append(token)
-        elif isinstance(token, InfixOperator):
+        elif token_type is InfixOperator:
             current_operator = token
-
-            last_operator = peek(operators)
+            last_operator = _peek(operators)
             while last_operator and last_operator.priority >= current_operator.priority:
-                operand2 = output.pop()
-                operand1 = output.pop()
-                operator = operators.pop()
-
-                output.append(operator.execute(operand1, operand2))
-                last_operator = peek(operators)
-
+                _apply_operation(operators, output)
+                last_operator = _peek(operators)
             operators.append(current_operator)
 
     while len(operators):
-        operand2 = output.pop()
-        operand1 = output.pop()
-        operator = operators.pop()
-
-        output.append(operator.execute(operand1, operand2))
+        _apply_operation(operators, output)
 
     return simplify_fraction(output[0])
